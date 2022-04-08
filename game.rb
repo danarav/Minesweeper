@@ -15,6 +15,19 @@ class MinesweeperGame
         @board = Board.new(layout[:grid_size], layout[:num_bombs])
     end
 
-    
+    def play 
+        until @board.won? || @board.lost
+            puts @board.render
+            action, pos = get_move
+            perform_move(action, pos)
+        end
+
+        if @boards.won?
+            puts "You win!"
+        elsif @board.lost?
+            puts "Bomb hit!"
+            puts @board.reveal
+        end
+    end
 
 end
