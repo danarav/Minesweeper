@@ -73,6 +73,16 @@ class Tile
 
     def render
         if flagged?
+            "F"
+        elsif explored?
+            adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s
+        else
+            "*"
+        end
+    end
+
+    def reveal
+        if flagged?
             bombed? ? "F" : "f"
         elsif bombed?
             explored? ? "X" : "B"
@@ -81,4 +91,7 @@ class Tile
         end
     end
 
+    def toggle_flag
+        @flagged = !@flagged unless @explored
+    end
 end
