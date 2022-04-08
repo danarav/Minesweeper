@@ -30,4 +30,32 @@ class MinesweeperGame
         end
     end
 
+    private
+
+    def get_move
+        action_type, row_s, col_s = gets.chomp.split(",")
+
+        [action_type, [row_s.to_i, col_s.to_i]]
+    end
+
+    def perform_move(action_type, pos)
+        tile = @board[pos]
+
+        case action_type
+        when "f"
+            tile.toggle_flag
+        when "e"
+            tile.explore
+        when "s"
+            save
+        end
+    end
+
+    def save
+        puts "Enter filename to save at:"
+        filename = gets.chomp
+
+        File.write(filename, YAML.dump(self))
+    end
+
 end
