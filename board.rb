@@ -1,9 +1,9 @@
 require_relative "tile"
 
-class board
+class Board
     
     def initialize(grid_size, num_bombs)
-        @grid_size - grid_size
+        @grid_size = grid_size
         @num_bombs = num_bombs
 
         generate_board
@@ -22,7 +22,7 @@ class board
 
     def render(reveal = false)
         @grid.map do |row|
-            row.map |tile|
+            row.map do |tile|
                 reveal ? tile.reveal : tile.render
             end.join("")
         end.join("\n")

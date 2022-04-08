@@ -16,13 +16,13 @@ class MinesweeperGame
     end
 
     def play 
-        until @board.won? || @board.lost
+        until @board.won? || @board.lost?
             puts @board.render
             action, pos = get_move
             perform_move(action, pos)
         end
 
-        if @boards.won?
+        if @board.won?
             puts "You win!"
         elsif @board.lost?
             puts "Bomb hit!"
@@ -57,5 +57,15 @@ class MinesweeperGame
 
         File.write(filename, YAML.dump(self))
     end
-
 end
+
+if $PROGRAM_NAME == __FILE__
+
+    case ARGV.count
+    when 0
+        MinesweeperGame.new(:tiny).play
+    when 1
+        YAML.load_file(ARGV.shift).play
+    end
+end
+
