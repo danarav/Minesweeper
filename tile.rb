@@ -8,4 +8,18 @@ class Tile
         @flagged = false
    end
 
+   attr_reader :pos
+
+   def bombed?
+    @bombed
+   end
+
+   def explored?
+    @explored
+   end
+
+   def flagged?
+    @flagged
+   end
+
 end
